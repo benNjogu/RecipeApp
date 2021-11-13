@@ -117,4 +117,14 @@ public class Recipe {
 		this.notes = notes;
 	}
 
+	public Set<Ingridient> getIngridients() {
+		return ingridients;
+	}
+
+	public void setIngridients(Set<Ingridient> ingridients) {
+		this.ingridients = ingridients;
+	}
+	
+	
+
 }
