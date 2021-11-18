@@ -32,7 +32,7 @@ public class Recipe {
 	private String url;
 	
 	@Lob
-	private String direction;
+	private String directions;
 
 	@Lob
 	private Byte[] image;
@@ -107,11 +107,11 @@ public class Recipe {
 	}
 
 	public String getDirection() {
-		return direction;
+		return directions;
 	}
 
 	public void setDirection(String direction) {
-		this.direction = direction;
+		this.directions = direction;
 	}
 
 	public Byte[] getImage() {
