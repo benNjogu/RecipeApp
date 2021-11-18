@@ -7,7 +7,7 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
 @SpringBootApplication
-@ComponentScan(basePackages = {"com.keytech.Controllers"})
+@ComponentScan(basePackages = {"com.keytech"})
 @EntityScan(basePackages = {"com.keytech.domain"})
 @EnableJpaRepositories(basePackages = {"com.keytech.repositories"})
 public class RecipeAppApplication {

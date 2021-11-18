@@ -11,9 +11,16 @@
 <body>
 
     <h1>My Recipes! jack daniels and a sprite are enough for the weekend</h1>
-    
-
-    </table>
+    <table>
+        <tr>
+            <th>ID</th>
+            <th>Description</th>
+        </tr>
+        <tr th:each="recipe : ${recipes}">
+            <td th:text = "${recipe.id}">123</td>
+            <td th:text = "${recipe.description}">Wrox</td>
+        </tr>
+     </table>
 
 </body>
 
