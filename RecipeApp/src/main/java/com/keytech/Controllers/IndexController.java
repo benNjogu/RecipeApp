@@ -12,6 +12,9 @@ import com.keytech.repositories.CategoryRepository;
 import com.keytech.repositories.UnitOfMeasureRepository;
 import com.keytech.service.RecipeService;
 
+import lombok.extern.slf4j.Slf4j;
+
+@Slf4j
 @Controller
 public class IndexController {
 
@@ -25,6 +28,7 @@ public class IndexController {
 
 	@RequestMapping({"", "/", "index", "index.html"})
 	public String getIndexPage(Model model) {
+		log.debug("Getting Index Page");
 		model.addAttribute("recipes", recipeService.getRecipes());
 		return "index";
 	}

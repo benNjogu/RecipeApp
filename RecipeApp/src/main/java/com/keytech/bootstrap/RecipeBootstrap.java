@@ -19,6 +19,9 @@ import com.keytech.repositories.CategoryRepository;
 import com.keytech.repositories.RecipeRepository;
 import com.keytech.repositories.UnitOfMeasureRepository;
 
+import lombok.extern.slf4j.Slf4j;
+
+@Slf4j
 @Component
 public class RecipeBootstrap implements ApplicationListener<ContextRefreshedEvent>{
 
@@ -36,6 +39,7 @@ public class RecipeBootstrap implements ApplicationListener<ContextRefreshedEven
     @Override
     public void onApplicationEvent(ContextRefreshedEvent event) {
         recipeRepository.saveAll(getRecipes());
+        log.debug("loading bootstrap data");
     }
 
     private List<Recipe> getRecipes() {

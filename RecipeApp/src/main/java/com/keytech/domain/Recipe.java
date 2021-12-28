@@ -18,8 +18,10 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 @Data
+@EqualsAndHashCode(exclude = {"ingredients", "categories","notes"})
 @Entity
 public class Recipe {
 
@@ -47,7 +49,7 @@ public class Recipe {
 	private Notes notes;
 
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "recipe")
-	private Set<Ingredient> ingredients = new HashSet<Ingredient>();
+	private Set<Ingredient> ingredients = new HashSet<>();
 	
 	@ManyToMany
 	@JoinTable(name = "recipe_category", joinColumns = @JoinColumn(name = "recipe_id"), inverseJoinColumns = @JoinColumn(name = "category_id"))
