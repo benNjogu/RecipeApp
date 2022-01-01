@@ -2,26 +2,34 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Recipe App</title>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Recipe App</title>
+
+	<!--Bootstrap css-->
+	<link rel="stylesheet" href="css/bootstrap.min.css" />
+	<link rel="stylesheet" href="css/font-awesome.min.css" />
 </head>
 
 <body>
 
-    <h1>My Recipes! jack daniels and a sprite are enough for the weekend</h1>
-    <table>
-        <tr>
-            <th>ID</th>
-            <th>Description</th>
-        </tr>
-        <tr th:each="recipe : ${recipes}">
-            <td th:text = "${recipe.id}">123</td>
-            <td th:text = "${recipe.description}">Wrox</td>
-        </tr>
-     </table>
+	<h1>My Recipes! jack daniels and a sprite are enough for the weekend</h1>
+	<table>
+		<tr>
+			<th>ID</th>
+			<th>Description</th>
+		</tr>
+		<tr th:each="recipe : ${recipes}">
+			<td th:text="${recipe.id}">123</td>
+			<td th:text="${recipe.description}">Wrox</td>
+		</tr>
+	</table>
 
+
+	<!--JQuery first, then Bootstrap js-->
+	<script src="js/jquery.min.js"></script>
+	<script src="js/bootstrap.bundle.min.js"></script>
 </body>
 
 </html>
