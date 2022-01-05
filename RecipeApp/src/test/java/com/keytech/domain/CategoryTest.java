@@ -2,6 +2,9 @@ package com.keytech.domain;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+import java.util.HashSet;
+import java.util.Set;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -31,7 +34,14 @@ class CategoryTest {
 
 	@Test
 	void testGetRecipes() {
-		fail("Not yet implemented");
+
+		Set<Recipe> recipeSet = new HashSet<>();
+		Recipe recipe = new Recipe();
+		recipeSet.add(recipe);
+		
+		category.setRecipes(recipeSet);
+		assertEquals(recipeSet.size(), 1);
+		
 	}
 
 }
