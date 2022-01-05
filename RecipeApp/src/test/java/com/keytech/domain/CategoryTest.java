@@ -24,7 +24,9 @@ class CategoryTest {
 
 	@Test
 	void testGetDescription() {
-		fail("Not yet implemented");
+		String description = "Tanzanian Category";
+		category.setDescription(description);
+		assertEquals(description, category.getDescription());
 	}
 
 	@Test
