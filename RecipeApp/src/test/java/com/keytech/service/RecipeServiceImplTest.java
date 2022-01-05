@@ -25,7 +25,7 @@ class RecipeServiceImplTest {
 	
 	@BeforeEach
 	public void setup() {
-		MockitoAnnotations.initMocks(this);
+		MockitoAnnotations.openMocks(this);
 		recipeServiceImpl = new RecipeServiceImpl(recipeRepository);
 	}
 	

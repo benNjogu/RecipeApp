@@ -26,7 +26,7 @@ class IndexControllerTest {
 	
 	@BeforeEach
 	public void setUp() {
-		MockitoAnnotations.initMocks(this);
+		MockitoAnnotations.openMocks(this);
 		
 		indexController = new IndexController(recipeService);
 	}
