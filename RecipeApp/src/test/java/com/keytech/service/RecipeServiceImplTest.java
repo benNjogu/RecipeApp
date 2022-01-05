@@ -32,7 +32,7 @@ class RecipeServiceImplTest {
 	@Test
 	void testGetRecipes() {
 		Recipe recipe = new Recipe();
-		HashSet recipeData = new HashSet<>();
+		HashSet<Recipe> recipeData = new HashSet<>();
 		recipeData.add(recipe);
 		
 		when(recipeRepository.findAll()).thenReturn(recipeData);
