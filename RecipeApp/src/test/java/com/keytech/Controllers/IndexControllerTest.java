@@ -42,6 +42,13 @@ class IndexControllerTest {
 		indexController = new IndexController(recipeService);
 	}
 
+	@Test
+	public void testMockMvc() throws Exception {
+		MockMvc mockMvc = MockMvcBuilders.standaloneSetup(indexController).build();
+		mockMvc.perform(get("/"))
+			   .andExpect(status().isOk())
+			   .andExpect(view().name("index"));
+	}
 	
 	@Test
 	void testGetIndexPage() {
