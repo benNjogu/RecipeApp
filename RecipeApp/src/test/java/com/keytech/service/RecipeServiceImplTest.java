@@ -19,7 +19,11 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.mockito.junit.jupiter.MockitoExtension;
+import org.springframework.test.context.ContextConfiguration;
 
+import com.keytech.RecipeApp.RecipeAppApplication;
+import com.keytech.converters.RecipeCommandToRecipe;
+import com.keytech.converters.RecipeToRecipeCommand;
 import com.keytech.domain.Recipe;
 import com.keytech.repositories.RecipeRepository;
 
@@ -34,7 +38,9 @@ class RecipeServiceImplTest {
 	@BeforeEach
 	public void setup() {
 		MockitoAnnotations.openMocks(this);
-		recipeService = new RecipeServiceImpl(recipeRepository);
+		recipeService = new RecipeServiceImpl(recipeRepository, 
+				new RecipeCommandToRecipe(null , null, null), 
+				new RecipeToRecipeCommand(null, null, null));
 	}
 	
 	@Test
