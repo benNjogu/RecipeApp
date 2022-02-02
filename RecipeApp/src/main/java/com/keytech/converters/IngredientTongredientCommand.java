@@ -32,7 +32,7 @@ public class IngredientTongredientCommand implements Converter<Ingredient, Ingre
 		command.setId(source.getId());
 		command.setDescription(source.getDescription());
 		command.setAmount(source.getAmount());
-		command.setUnitOfMeasure(uomConverter.convert(source.getUnitOfMeasure()));
+		command.setUom(uomConverter.convert(source.getUnitOfMeasure()));
 		return command;
 	}
 
