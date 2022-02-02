@@ -2,6 +2,7 @@ package com.keytech.Controllers;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -10,6 +11,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.keytech.commands.RecipeCommand;
 import com.keytech.service.RecipeService;
+
+import jdk.internal.org.jline.utils.Log;
 
 @Controller
 public class RecipeController {
@@ -48,6 +51,15 @@ public class RecipeController {
 		
 		RecipeCommand savedCommand = recipeService.saveRecipeCommand(command);
 		return "redirect:/recipe/"+ savedCommand.getId()+"/show";
+	}
+	
+	@GetMapping
+	@RequestMapping("recipe/{id}/delete")
+	public String deleteById(@PathVariable String id) {
+		
+//		Log.debug("deleting id: "+id);
+		recipeService.deleteById(Long.valueOf(id));
+		return "redirect:/";
 	}
 	
 }
