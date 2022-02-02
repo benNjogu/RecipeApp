@@ -13,7 +13,9 @@ import com.keytech.commands.RecipeCommand;
 import com.keytech.service.RecipeService;
 
 import jdk.internal.org.jline.utils.Log;
+import lombok.extern.slf4j.Slf4j;
 
+@Slf4j
 @Controller
 public class RecipeController {
 
@@ -57,7 +59,7 @@ public class RecipeController {
 	@RequestMapping("recipe/{id}/delete")
 	public String deleteById(@PathVariable String id) {
 		
-//		Log.debug("deleting id: "+id);
+		log.debug("deleting id: "+id);
 		recipeService.deleteById(Long.valueOf(id));
 		return "redirect:/";
 	}
