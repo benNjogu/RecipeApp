@@ -18,12 +18,16 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
 import com.keytech.commands.RecipeCommand;
+import com.keytech.service.IngredientService;
 import com.keytech.service.RecipeService;
 
 class IngredientControllerTest {
 
 	@Mock
 	RecipeService recipeService;
+	
+	@Mock
+	IngredientService ingredientService;
 	
 	IngredientController controller;
 	
@@ -33,7 +37,7 @@ class IngredientControllerTest {
 	void setUp() throws Exception {
 		
 		MockitoAnnotations.initMocks(this);
-		controller = new IngredientController(recipeService);
+		controller = new IngredientController(recipeService, ingredientService);
 		mockMvc = MockMvcBuilders.standaloneSetup(controller).build();
 	}
 
