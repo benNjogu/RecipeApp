@@ -19,6 +19,7 @@ import com.keytech.converters.UnitOfMeasureToUnitOfMeasureCommand;
 import com.keytech.domain.Ingredient;
 import com.keytech.domain.Recipe;
 import com.keytech.repositories.RecipeRepository;
+import com.keytech.repositories.UnitOfMeasureRepository;
 
 class IngredientServiceImplTest {
 
@@ -38,7 +39,7 @@ class IngredientServiceImplTest {
 	void setUp() throws Exception {
 		MockitoAnnotations.initMocks(this);
 		
-		service = new IngredientServiceImpl(command, repository);
+		service = new IngredientServiceImpl(command, repository, null, null);
 	}
 
 	@Test
@@ -70,6 +71,32 @@ class IngredientServiceImplTest {
 		assertEquals(Long.valueOf(3L), ingredientCommand.getId());
 		assertEquals(Long.valueOf(1L), ingredientCommand.getRecipeId());
 		verify(repository, times(1)).findById(any());
+		
+	}
+	
+	@Test
+	public void testRecipeSavedCommand() throws Exception {
+		//given
+		IngredientCommand command = new IngredientCommand();
+		command.setId(3L);
+		command.setRecipeId(2L);
+		
+		Optional<Recipe> recipeOptional = Optional.of(new Recipe());
+		
+		Recipe savedRecipe = new Recipe();
+		savedRecipe.addIngredient(new Ingredient());
+		savedRecipe.getIngredients().iterator().next().setId(3L);
+		
+		when(repository.findById(any())).thenReturn(recipeOptional);
+		when(repository.save(any())).thenReturn(savedRecipe);
+		
+		//when
+		IngredientCommand ingredientCommand = service.saveIngredientCommand(command);
+		
+		//then
+		assertEquals(Long.valueOf(3L), savedRecipe.getId());
+		verify(repository, times(1)).findById(any());
+		verify(repository, times(1)).save(any(Recipe.class));
 		
 	}
 
