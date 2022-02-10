@@ -3,9 +3,12 @@ package com.keytech.Controllers;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.keytech.commands.IngredientCommand;
 import com.keytech.domain.UnitOfMeasure;
 import com.keytech.service.IngredientService;
 import com.keytech.service.RecipeService;
@@ -57,6 +60,17 @@ public class IngredientController {
 		model.addAttribute("uomList", unitOfMeasureService.listAllUOMs());
 		
 		return "recipe/ingredient/ingredientform";
+	}
+	
+	@PostMapping
+	@RequestMapping("recipe/{recipeId}/ingredient")
+	public String saveOrUpdate(@ModelAttribute IngredientCommand command) {
+		IngredientCommand savedCommand = ingredientService.saveIngredientCommand(command);
+		
+		log.debug("saved recipe id: " + savedCommand.getRecipeId());
+		log.debug("saved ingredient id: " + savedCommand.getId());
+		
+		return "redirect:/recipe/" + savedCommand.getRecipeId() + "/ingredient/" + savedCommand.getId() + "/show";
 	}
 	
 }
