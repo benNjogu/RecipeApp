@@ -14,7 +14,9 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
 import com.keytech.commands.IngredientCommand;
+import com.keytech.converters.IngredientCommandToIngredient;
 import com.keytech.converters.IngredientTongredientCommand;
+import com.keytech.converters.UnitOfMeasureCommandToUnitOfMeasure;
 import com.keytech.converters.UnitOfMeasureToUnitOfMeasureCommand;
 import com.keytech.domain.Ingredient;
 import com.keytech.domain.Recipe;
@@ -24,22 +26,27 @@ import com.keytech.repositories.UnitOfMeasureRepository;
 class IngredientServiceImplTest {
 
 	IngredientTongredientCommand command;
+	IngredientCommandToIngredient command2;
 	
 	@Mock
 	RecipeRepository repository;
+	
+	@Mock
+	UnitOfMeasureRepository unitOfMeasureRepository;
 	
 	IngredientService service;
 	
 	public IngredientServiceImplTest() {
 		super();
 		this.command = new IngredientTongredientCommand(new UnitOfMeasureToUnitOfMeasureCommand());
+		this.command2 = new IngredientCommandToIngredient(new UnitOfMeasureCommandToUnitOfMeasure());
 	}
 
 	@BeforeEach
 	void setUp() throws Exception {
 		MockitoAnnotations.initMocks(this);
 		
-		service = new IngredientServiceImpl(command, repository, null, null);
+		service = new IngredientServiceImpl(command, repository, unitOfMeasureRepository, command2);
 	}
 
 	@Test
@@ -91,10 +98,10 @@ class IngredientServiceImplTest {
 		when(repository.save(any())).thenReturn(savedRecipe);
 		
 		//when
-		IngredientCommand ingredientCommand = service.saveIngredientCommand(command);
+		IngredientCommand savedCommand = service.saveIngredientCommand(command);
 		
 		//then
-		assertEquals(Long.valueOf(3L), savedRecipe.getId());
+		assertEquals(Long.valueOf(3L), savedCommand.getId());
 		verify(repository, times(1)).findById(any());
 		verify(repository, times(1)).save(any(Recipe.class));
 		
