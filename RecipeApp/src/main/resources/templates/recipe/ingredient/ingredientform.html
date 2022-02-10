@@ -13,17 +13,16 @@
 
 	<div class="container-fluid" style="margin-top: 20px">
 		<div class="row">
-			<div class="col-md-6 col-md-offset-3">
+			<div class="offset-md-3 col-md-6 ">
 				<form th:object="${ingredient}" th:action="@{'/recipe/' + ${ingredient.getRecipeId()} + '/ingredient/' + ${ingredient.id} + '/show'} "
 					method="post">
 					<input type="hidden" th:field="*{id}" />
 					<div class="pannel-group">
-						<div class="panel panel-primary">
-							<div class="panel-heading">
-								<h1 class="panel-title">Edit Ingredient Information</h1>
+						<div class="card mb-3">
+							<div class="card-header bg-primary text-white">
+								<h1>Edit Ingredient Information</h1>
 							</div>
-							<div class="panel-body">
-
+							<div class="card-body">
 
 								<div class="row">
 									<div class="col-md-3 form-group">
