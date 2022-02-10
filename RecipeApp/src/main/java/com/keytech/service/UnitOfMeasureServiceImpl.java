@@ -4,10 +4,13 @@ import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
 
+import org.springframework.stereotype.Service;
+
 import com.keytech.commands.UnitOfMeasureCommand;
 import com.keytech.converters.UnitOfMeasureToUnitOfMeasureCommand;
 import com.keytech.repositories.UnitOfMeasureRepository;
 
+@Service
 public class UnitOfMeasureServiceImpl implements UnitOfMeasureService {
 
 	private final UnitOfMeasureRepository unitOfMeasureRepository;
