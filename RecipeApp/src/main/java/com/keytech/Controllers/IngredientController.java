@@ -9,6 +9,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.keytech.commands.IngredientCommand;
+import com.keytech.commands.RecipeCommand;
+import com.keytech.commands.UnitOfMeasureCommand;
 import com.keytech.domain.UnitOfMeasure;
 import com.keytech.service.IngredientService;
 import com.keytech.service.RecipeService;
@@ -62,6 +64,28 @@ public class IngredientController {
 		return "recipe/ingredient/ingredientform";
 	}
 	
+	@GetMapping
+	@RequestMapping("recipe/{recipeId}/ingredient/new")
+	public String newRecipe(@PathVariable String recipeId, Model model) {
+		
+		//Make sure we have a good id value
+		RecipeCommand recipeCommand = recipeService.findCommandById(Long.valueOf(recipeId));
+		//todo raise exception if null
+		
+		//need to return back parent id for hidden form property
+		IngredientCommand ingredientCommand = new IngredientCommand();
+		ingredientCommand.setRecipeId(Long.valueOf(recipeId));
+		model.addAttribute("ingredient", ingredientCommand);
+		
+		//unit uom
+		ingredientCommand.setUom(new UnitOfMeasureCommand());
+		
+		model.addAttribute("uomList", unitOfMeasureService.listAllUOMs());
+		
+		return "recipe/ingredient/ingredientform";
+		
+	}
+	
 	@PostMapping
 	@RequestMapping("recipe/{recipeId}/ingredient")
 	public String saveOrUpdate(@ModelAttribute IngredientCommand command) {
@@ -73,4 +97,5 @@ public class IngredientController {
 		return "redirect:/recipe/" + savedCommand.getRecipeId() + "/ingredient/" + savedCommand.getId() + "/show";
 	}
 	
+
 }
