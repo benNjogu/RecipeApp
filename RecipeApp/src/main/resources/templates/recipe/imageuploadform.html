@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<meta charset="UTF-8" />
+	<title>Image Upload Form</title>
+
+	<!--Bootstrap css-->
+	<link rel="stylesheet" th:href="@{/resources/css/bootstrap.min.css}" />
+	<link rel="stylesheet" th:href="@{/resources/css/font-awesome.min.css}" />
+
+</head>
+
+<body>
+	<div class="container-fluid" style="margin-top: 20px">
+		<div class="row">
+			<div class="offset-md-3 col-md-6">
+				<div class="card">
+					<div>
+						<div class="card-header bg-primary text-white">
+							<h1>Upload a new recipe image</h1>
+						</div>
+						<div class="card-body">
+							<div class="row">
+								<div class="col-md-5">
+									<form action="http:\\localhost" method="post" enctype="multipart/form-data"
+										th:action="@{'/recipe/' + ${recipe.getId()} + '/image'}">
+										<label class="control-label">Select File</label>
+										<input id="imagefile" name="imagefile" type="file" class="file">
+										<button type="submit" class="btn btn-primary mt-3">Submit</button>
+									</form>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<!--JQuery first, then Bootstrap js-->
+	<script th:src="@{/resources/js/jquery.min.js}"></script>
+	<script th:src="@{/resources/js/bootstrap.bundle.min.js}"></script>
+</body>
+
+</html>
