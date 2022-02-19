@@ -24,6 +24,7 @@ import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
 import com.keytech.commands.RecipeCommand;
 import com.keytech.domain.Recipe;
+import com.keytech.exceptions.NotFoundException;
 import com.keytech.service.RecipeService;
 
 @ExtendWith(MockitoExtension.class)
@@ -57,6 +58,15 @@ class RecipeControllerTest {
 				.andExpect(status().isOk())
 				.andExpect(view().name("recipe/show"))
 				.andExpect(model().attributeExists("recipe"));
+	}
+	
+	@Test
+	void testShowByIdNotFound() throws Exception {
+		Recipe recipe = new Recipe();
+		recipe.setId(1l);
+		when(recipeService.findById(any())).thenThrow(NotFoundException.class);
+		mockMvc.perform(get("/recipe/1/show"))
+				.andExpect(status().isNotFound());
 	}
 	
 	@Test

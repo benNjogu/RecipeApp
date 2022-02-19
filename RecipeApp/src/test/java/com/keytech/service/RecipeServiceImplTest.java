@@ -13,9 +13,11 @@ import java.util.HashSet;
 import java.util.Optional;
 import java.util.Set;
 
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
+import org.junit.jupiter.api.function.Executable;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.mockito.junit.jupiter.MockitoExtension;
@@ -25,6 +27,7 @@ import com.keytech.RecipeApp.RecipeAppApplication;
 import com.keytech.converters.RecipeCommandToRecipe;
 import com.keytech.converters.RecipeToRecipeCommand;
 import com.keytech.domain.Recipe;
+import com.keytech.exceptions.NotFoundException;
 import com.keytech.repositories.RecipeRepository;
 
 @ExtendWith(MockitoExtension.class)
@@ -55,6 +58,23 @@ class RecipeServiceImplTest {
 		
 		assertEquals(recipes.size(), 1);
 		verify(recipeRepository, times(1)).findAll();
+	}
+	
+	@Test
+	void getRecipeByIdTestNotFound() {
+		Assertions.assertThrows(NotFoundException.class, new Executable() {
+			
+			@Override
+			public void execute() throws Throwable {
+
+				Optional<Recipe> recipeOptional = Optional.empty();
+				when(recipeRepository.findById(any())).thenReturn(recipeOptional);
+				Recipe recipeReturned = recipeService.findById(1l);
+			}
+		});
+		
+
+		
 	}
 	
 	@Test
