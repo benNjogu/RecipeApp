@@ -14,8 +14,9 @@
 <body>
 	<div class="container-fluid" style="margin-top: 20px">
 		<div class="row">
-			<div class="offset-md-3 col-md-6">
+			<div class="offset-md-3 col-md-6 text-center">
 				<h1>404 not found</h1>
+				<p th:text="${exception.getMessage()}"></p>
 			</div>
 		</div>
 	</div>
